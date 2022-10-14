@@ -7,6 +7,10 @@ using System.Threading.Tasks;
 namespace SimCity {
     internal class Police: Person {
         public List<Item> _confiscated = new List<Item>();
-        public List<Item> Item { get { return _confiscated; } }
+        public override List<Item> Inventory { get { return _confiscated; } }
+
+        public override void Move() {
+            throw new NotImplementedException();
+        }
     }
 }

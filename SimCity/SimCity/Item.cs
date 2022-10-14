@@ -8,5 +8,10 @@ namespace SimCity {
     internal class Item {
         public Person Owner { get; init; }
         public string Type { get; init; }
+
+        public Item(Person owner, string type) {
+            Owner = owner;
+            Type = type;
+        }
     }
 }

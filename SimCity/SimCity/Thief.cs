@@ -7,6 +7,9 @@ using System.Threading.Tasks;
 namespace SimCity {
     internal class Thief: Person {
         private List<Item> _plunder = new List<Item>();
-        public List<Item> Item { get { return _plunder; } }
+        public override List<Item> Inventory { get { return _plunder; } }
+        public override void Move() {
+            throw new NotImplementedException();
+        }
     }
 }

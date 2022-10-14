@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "EAI4mS8w2dw7BTMP4tijoai+YEW6eH8w0atLdfbk5CkJqYPYyAHDgrxm1s9FgP8DdMjqy0wIHpGdlvhBrI99UA==",
+  "dgSpecHash": "ihirsWiw44szF36t2F8au0QSf/IG2FFxk6BotbzwVRYREJLEGOPro0gkMcd8Uls6tiZzNRXGmIdSa4fwr31sig==",
   "success": true,
-  "projectFilePath": "C:\\Users\\thoma\\source\\repos\\SimCity\\SimCity\\SimCity.csproj",
+  "projectFilePath": "D:\\C#projekt\\Repos\\SimulatedCity\\SimCity\\SimCity\\SimCity.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

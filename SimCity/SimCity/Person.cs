@@ -8,13 +8,13 @@ namespace SimCity {
     internal abstract class Person {
         public string? Name { get; set; }
         public char Graphics { get; set; }
-        public List<Item> Items { get; init; }
+        public abstract List<Item> Inventory { get;}
 
-
+        public abstract void Move();
         //Only if prop solution wont work
         /*
-        public List<Item> GetItems() {
-            return Items;
+        public List<Item> GetInventory() {
+            return Inventory;
         }
         */
     }
