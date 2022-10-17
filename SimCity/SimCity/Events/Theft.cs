@@ -8,5 +8,8 @@ namespace SimCity.Events
 {
     internal class Theft
     {
+        private static int _numberOfThefts;
+        public ConsoleColor Color { get { return ConsoleColor.Red; } }
+        public int NumberOfInstances { get { return _numberOfThefts; } }
     }
 }

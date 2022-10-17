@@ -11,7 +11,7 @@ namespace SimCity.Events
     internal class Event
     {
         private Tuple<Person, Person> _persons;
-        private ConsoleColor _color;
+        public ConsoleColor Color { get; set; }
         public virtual int NumberOfInstances { get; }
         public Event(Person one, Person theOther)
         {
@@ -27,7 +27,7 @@ namespace SimCity.Events
         }
         public ConsoleColor getColor()
         {
-            return _color;
+            return Color;
         }
         public virtual void ResolveEvent()
         {
