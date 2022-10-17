@@ -10,11 +10,10 @@ namespace SimCity.Persons
     internal class Citizen : Person
     {
         private List<Item> _belongings = new();
-
+        public override char Graphics { get => 'C'; }
         public Citizen(string? name, (int, int) position) : base(name, position) {
 
         }
-
-        public override List<Item> Inventory { get { return _belongings; } }
+        public override List<Item> Inventory { get => _belongings; }
     }
 }

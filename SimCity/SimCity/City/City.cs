@@ -18,7 +18,8 @@ namespace SimCity.City
         public City(string name)
         {
             Name = name;
-            _locations.Add(new Location("City Center", new Tuple<int, int>(0, 0), new Tuple<int, int>(20, 100)));
+            _locations.Add(new Location("City Center", (0, 0), (20, 100)));
+            _locations.Add(new Location("Jail", (0,0 /* Position Here */), (10, 10)));
             _events = new List<Event>();
             _population = new List<Person>();
             PopulateCity(10, 20, 30);

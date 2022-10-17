@@ -10,12 +10,12 @@ namespace SimCity.Persons
     internal class Police : Person
     {
         public List<Item> _confiscated = new List<Item>();
-
+        public override char Graphics { get => 'P'; }
         public Police(string? name, (int, int) position) : base(name, position) {
 
         }
 
-        public override List<Item> Inventory { get { return _confiscated; } }
+        public override List<Item> Inventory { get => _confiscated; }
 
     }
 }

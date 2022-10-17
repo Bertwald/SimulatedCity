@@ -9,12 +9,12 @@ namespace SimCity.Persons
 {
     internal class Thief : Person
     {
-        private List<Item> _plunder = new List<Item>();
-
+        private List<Item> _plunder = new();
+        public override char Graphics { get => 'T'; }
         public Thief(string? name, (int, int) position) : base(name, position) {
 
         }
 
-        public override List<Item> Inventory { get { return _plunder; } }
+        public override List<Item> Inventory { get => _plunder; }
     }
 }

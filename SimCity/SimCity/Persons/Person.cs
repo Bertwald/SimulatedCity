@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 using SimCity.Items;
 
 namespace SimCity.Persons
@@ -43,13 +44,17 @@ namespace SimCity.Persons
             Random random = new();
             Name = name;
             this.Position = position;
-            //Ugly....
+            _direction = GetRandomDirectionTuple();
+        }
+        internal Person((int, int) position) {
+            Name = "NPC";
+            this.Position = position;
             _direction = GetRandomDirectionTuple();
         }
         public string? Name { get; set; }
         public (int x, int y) Position { get; set; }
         private (int x, int y) _direction;
-        public char Graphics { get; set; }
+        public abstract char Graphics { get; }
         public abstract List<Item> Inventory { get; }
         public virtual void Move() {
             Position = (Position.x + _direction.x , Position.y + _direction.y);
