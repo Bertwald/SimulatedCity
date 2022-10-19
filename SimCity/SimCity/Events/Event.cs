@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Threading.Tasks;
+using SimCity.Locations;
 using SimCity.Persons;
 
 namespace SimCity.Events
@@ -10,16 +12,18 @@ namespace SimCity.Events
     internal class Event
     {
         private Tuple<Person, Person> _persons;
+        protected List<Location> _locations;
         public virtual ConsoleColor Color { get; }
         public virtual int NumberOfInstances { get; }
         public int Row { get; init; }
         public int Col { get; init; }
         public virtual char Symbol { get; }
-        public Event(Person one, Person theOther, int row, int col)
+        public Event(Person one, Person theOther, int row, int col, List<Location> locations)
         {
             _persons = new Tuple<Person, Person>(one, theOther);
             Row = row;
             Col = col;
+            _locations = locations;
         }
         public Person getFirstPerson()
         {
@@ -35,17 +39,17 @@ namespace SimCity.Events
         }
         public virtual void ResolveEvent()
         {
-            Console.WriteLine("Derpy Resolution of Event");
+            //Console.WriteLine("Derpy Resolution of Event");
         }
 
-        internal static Event Create((Person first, Person second) pair) {
+        internal static Event Create((Person first, Person second) pair, List<Location> locations) {
             if(pair.second is Police) {
-                //return new Arrest();
+                return new Arrest(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
             if (pair.second is Citizen) {
-                //return new Theft();
+                return new Theft(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
-            return new NullEvent(pair.first, pair.second,150,150);
+            return new NullEvent(pair.first, pair.second,150,150, locations);
         }
         internal virtual string GetEventString() {
             return "Derpy description of event";

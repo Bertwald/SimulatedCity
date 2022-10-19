@@ -10,7 +10,7 @@ namespace SimCity.Persons
 {
     internal class Police : Person
     {
-        public List<Item> _confiscated = new List<Item>();
+        public static List<Item> _confiscated = new List<Item>();
         public override char Graphics { get => 'P'; }
         public Police(string? name, Location home, (int, int) position) : base(name, home, position) {
         }
@@ -20,7 +20,7 @@ namespace SimCity.Persons
 
         }
 
-        public override List<Item> Inventory { get => _confiscated; }
+        public override List<Item> Inventory { get => _confiscated; protected set => _confiscated = value; }
 
     }
 }

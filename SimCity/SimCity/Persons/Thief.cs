@@ -19,7 +19,6 @@ namespace SimCity.Persons
         public Thief(string? name, Location home, (int, int) position, (int, int) direction): base(name, home, position, direction) {
 
         }
-
-        public override List<Item> Inventory { get => _plunder; }
+        public override List<Item> Inventory { get => _plunder; protected set => _plunder = value; }
     }
 }

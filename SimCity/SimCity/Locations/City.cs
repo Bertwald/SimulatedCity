@@ -11,7 +11,7 @@ namespace SimCity.Locations
 {
     internal class City
     {
-        private int _fps = 6;
+        private int _fps = 10;
         private List<Location> _locations = new();
         public string Name { get; set; }
         private List<Event> _events;
@@ -53,6 +53,8 @@ namespace SimCity.Locations
                HandleEvents();
                HandleIO();
                CleanEvents();
+               Console.SetCursorPosition(0, 50);
+               Console.Write($"Timme: {hour}");
                Thread.Sleep(1000/_fps);
             }
         }
@@ -72,7 +74,7 @@ namespace SimCity.Locations
                 toPrint += location.GetPrintableString();
             }
             View.PrintCityString(toPrint);
-            View.PrintCityEvents(_events);
+            View.PrintCityEvents(_events, _locations);
         }
         private void CleanEvents()
         {
@@ -85,11 +87,11 @@ namespace SimCity.Locations
                         where first.Position == second.Position && (first != second) && first is Thief && second is not Thief
                         select (first, second);
             foreach (var pair in pairs) {
-                _events.Add(Event.Create(pair));
+                _events.Add(Event.Create(pair, _locations));
             }
-            //Generate the events by finding all collisions between population
-            ;
-            //Execute the "Event.Resolve" action for each event
+            foreach (Event e in _events){
+                    e.ResolveEvent();
+            }
         }
         private void UpdateLocations()
         {

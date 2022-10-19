@@ -38,7 +38,7 @@ namespace SimCity.Locations {
         }
         public override List<Person> Inhabitants { get => _people; }
         public override (int, int) GetRandomPosition() {
-            return (_random.Next(_rows),_random.Next(_cols));
+            return (_random.Next(1, _rows-1),_random.Next(1, _cols-1));
         }
 
         internal override string GetPrintableString() {
@@ -47,12 +47,17 @@ namespace SimCity.Locations {
                 newFrame[person.Position.x, person.Position.y] = person.Graphics;
             }
             string drawingLine = "";
+            drawingLine += new string('=', 102);
+            drawingLine += System.Environment.NewLine;
             for (int row = 0; row < newFrame.GetLength(0); row++) {
+                drawingLine += "|";
                 for (int col = 0; col < newFrame.GetLength(1); col++) {
                     drawingLine += newFrame[row, col].ToString();
                 }
+                drawingLine += "|";
                 drawingLine += System.Environment.NewLine;
             }
+            drawingLine += new string('=', 102);
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.x, person.Position.y] = ' ';
             }

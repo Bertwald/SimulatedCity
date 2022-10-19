@@ -73,13 +73,13 @@ namespace SimCity.Persons
         public string? Name { get; set; }
         public Location Home { get; set; }
         //public (int x, int y) Position { get; set; }
-        public (int x, int y) Position { get => (xPos, yPos);}
+        public (int x, int y) Position { get => (xPos, yPos); set => (xPos, yPos) = value; }
         private int xPos;
         private int yPos;
         private (int x, int y) _direction;
         private (int x, int y) _bounds;
         public abstract char Graphics { get; }
-        public abstract List<Item> Inventory { get; init; }
+        public abstract List<Item> Inventory { get; protected set; }
         public virtual void Move() {
             xPos += _direction.x;
             yPos += _direction.y;
@@ -107,6 +107,19 @@ namespace SimCity.Persons
                 Position = (Position.x, Position.y - _bounds.y);
             }
             */
+        }
+        internal void SetHome(Location location) {
+            if (location == null) {
+                return;
+            } else {
+                Home = location;
+                _bounds = Home.Size;
+                Position = Home.GetRandomPosition();
+            }
+        }
+        //Gets the person as in the new output of wednesday 19/10
+        internal string GetPersonInfo() {
+            return "";
         }
 
         //Only if prop solution wont work
