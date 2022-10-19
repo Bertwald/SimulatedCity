@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using SimCity.Items;
+using SimCity.Locations;
 
 namespace SimCity.Persons
 {
@@ -11,7 +12,11 @@ namespace SimCity.Persons
     {
         private List<Item> _plunder = new();
         public override char Graphics { get => 'T'; }
-        public Thief(string? name, (int, int) position) : base(name, position) {
+        public Thief(string? name, Location home, (int, int) position) : base(name, home, position) {
+        }
+        internal Thief(Location home, (int, int) position) : base(home, position) {
+        }
+        public Thief(string? name, Location home, (int, int) position, (int, int) direction): base(name, home, position, direction) {
 
         }
 
