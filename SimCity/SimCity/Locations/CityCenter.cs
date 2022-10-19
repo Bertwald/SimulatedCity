@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 namespace SimCity.Locations {
     internal class CityCenter : Location {
         private List<Person> _people;
-        private static readonly int _cols = 100;
-        private static readonly int _rows = 20;
-        private readonly char[,] _empty = new char[20, 100];
+        private static readonly int _cols = 109;
+        private static readonly int _rows = 19;
+        private readonly char[,] _empty = new char[19, 109];
         public override (int rowSize, int colSize) Size { get => (_rows, _cols); }
-        char[,] newFrame = new char[20, 100];
+        char[,] newFrame = new char[19, 109];
 
         /* Unsafe struct for use if other methods are too slow
         public unsafe struct CharacterContainer {
@@ -47,7 +47,7 @@ namespace SimCity.Locations {
                 newFrame[person.Position.x, person.Position.y] = person.Graphics;
             }
             string drawingLine = "";
-            drawingLine += new string('=', 102);
+            drawingLine += (new string('=', 52) + "SimCity" + new string('=', 52));
             drawingLine += System.Environment.NewLine;
             for (int row = 0; row < newFrame.GetLength(0); row++) {
                 drawingLine += "|";
@@ -57,7 +57,7 @@ namespace SimCity.Locations {
                 drawingLine += "|";
                 drawingLine += System.Environment.NewLine;
             }
-            drawingLine += new string('=', 102);
+            drawingLine += new string('=', 111);
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.x, person.Position.y] = ' ';
             }

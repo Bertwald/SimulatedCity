@@ -47,7 +47,7 @@ namespace SimCity.Locations {
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.y, person.Position.x] = ' ';
             }
-            drawingLine += new string('*', 12);
+            drawingLine += "****JAIL****";
             return drawingLine;
         }
     }

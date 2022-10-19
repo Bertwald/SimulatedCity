@@ -7,10 +7,8 @@ using System.Threading.Tasks;
 using SimCity.Locations;
 using SimCity.Persons;
 
-namespace SimCity.Events
-{
-    internal class Event
-    {
+namespace SimCity.Events {
+    internal class Event {
         private Tuple<Person, Person> _persons;
         protected List<Location> _locations;
         public virtual ConsoleColor Color { get; }
@@ -18,41 +16,39 @@ namespace SimCity.Events
         public int Row { get; init; }
         public int Col { get; init; }
         public virtual char Symbol { get; }
-        public Event(Person one, Person theOther, int row, int col, List<Location> locations)
-        {
+        public Event(Person one, Person theOther, int row, int col, List<Location> locations) {
             _persons = new Tuple<Person, Person>(one, theOther);
             Row = row;
             Col = col;
             _locations = locations;
         }
-        public Person getFirstPerson()
-        {
+        public Person getFirstPerson() {
             return _persons.Item1;
         }
-        public Person getLastPerson()
-        {
+        public Person getLastPerson() {
             return _persons.Item2;
         }
-        public ConsoleColor getColor()
-        {
+        public ConsoleColor getColor() {
             return Color;
         }
-        public virtual void ResolveEvent()
-        {
+        public virtual void ResolveEvent() {
             //Console.WriteLine("Derpy Resolution of Event");
         }
 
         internal static Event Create((Person first, Person second) pair, List<Location> locations) {
-            if(pair.second is Police) {
+            if (pair.first is Thief && pair.second is Police) {
                 return new Arrest(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
-            if (pair.second is Citizen) {
+            if (pair.first is Thief && pair.second is Citizen) {
                 return new Theft(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
-            if(pair.first is Thief && pair.second == pair.first) {
+            if (pair.first is Thief && pair.second == pair.first) {
                 return new Amnesty(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
-            return new NullEvent(pair.first, pair.second,150,150, locations);
+            if (pair.first is Police && pair.second is Citizen) {
+                return new Reclamation(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
+            }
+            return new NullEvent(pair.first, pair.second, 150, 150, locations);
         }
         internal virtual string GetEventString() {
             return "Derpy description of event";
