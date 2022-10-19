@@ -12,8 +12,22 @@ namespace SimCity.Events
         private static int _numberOfArrests = 0;
         public override char Symbol { get => 'A'; }
 
-        public Arrest(Person one, Person theOther, int row, int col) : base(one, theOther, row, col) {
+        public Arrest(Person thief, Person police, int row, int col) : base(thief, police, row, col) {
             _numberOfArrests++;
+        }
+        public override void ResolveEvent() {
+            //Check if there is goods in thief inventory
+
+            //If stolen goods then
+              //Put stolen goods in police inventory
+              //Remove stolen goods from thief inventory
+              //Place thief in jail
+              //Set thief position to any random square in jail location
+
+            //Else, Give a proper beating just in case he was up to no good
+        }
+        internal override string GetEventString() {
+            return "Derpy description of event";
         }
 
         public override ConsoleColor Color { get => ConsoleColor.Blue; }

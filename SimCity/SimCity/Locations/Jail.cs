@@ -11,6 +11,7 @@ namespace SimCity.Locations {
         private static readonly int _cols = 10;
         private static readonly int _rows = 10;
         private char[,] _empty = new char[10, 10];
+        char[,] newFrame = new char[10, 10];
         public override List<Person> Inhabitants { get => _inJail; }
         public override (int rowSize, int colSize) Size { get => (_rows, _cols); }
 
@@ -27,7 +28,7 @@ namespace SimCity.Locations {
             }
         }
         internal override string GetPrintableString() {
-            char[,] newFrame = (char[,])_empty.Clone();
+            //char[,] newFrame = (char[,])_empty.Clone();
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.y, person.Position.x] = person.Graphics;
             }
@@ -37,6 +38,9 @@ namespace SimCity.Locations {
                     drawingLine += newFrame[row, col].ToString();
                 }
                 drawingLine += System.Environment.NewLine;
+            }
+            foreach (Person person in Inhabitants) {
+                newFrame[person.Position.y, person.Position.x] = ' ';
             }
             return drawingLine;
         }

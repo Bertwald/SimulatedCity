@@ -10,12 +10,9 @@ namespace SimCity.Items
     public class Item
     {
         internal Person Owner { get; init; }
-        internal string Type { get; init; }
-
-        internal Item(Person owner, string type)
+        internal Item(Person owner)
         {
             Owner = owner;
-            Type = type;
         }
     }
 }

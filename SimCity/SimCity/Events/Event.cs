@@ -47,5 +47,8 @@ namespace SimCity.Events
             }
             return new NullEvent(pair.first, pair.second,150,150);
         }
+        internal virtual string GetEventString() {
+            return "Derpy description of event";
+        }
     }
 }
