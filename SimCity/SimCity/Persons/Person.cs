@@ -49,7 +49,7 @@ namespace SimCity.Persons
             yPos= position.Item2;
             _direction = GetRandomDirectionTuple();
             _bounds = home.Size;
-            Inventory = InventoryBuilder.GetCitizenInventory(this);
+            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
         internal Person(Location home, (int, int) position) {
             Home = home;
@@ -58,7 +58,7 @@ namespace SimCity.Persons
             yPos = position.Item2;
             _direction = GetRandomDirectionTuple();
             _bounds = home.Size;
-            Inventory = InventoryBuilder.GetCitizenInventory(this);
+            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
         internal Person(string? name, Location home, (int x, int y) position, (int x, int y) direction) {
             Name = name;
@@ -67,7 +67,7 @@ namespace SimCity.Persons
             yPos = position.y;
             _direction = direction;
             _bounds = home.Size;
-            Inventory = InventoryBuilder.GetCitizenInventory(this);
+            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
 
         public string? Name { get; set; }
@@ -115,6 +115,7 @@ namespace SimCity.Persons
                 Home = location;
                 _bounds = Home.Size;
                 Position = Home.GetRandomPosition();
+                _direction = GetRandomDirectionTuple();
             }
         }
         //Gets the person as in the new output of wednesday 19/10

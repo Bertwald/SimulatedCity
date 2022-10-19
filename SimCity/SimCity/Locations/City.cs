@@ -12,6 +12,7 @@ namespace SimCity.Locations
     internal class City
     {
         private int _fps = 10;
+        private static Random random = new Random();
         private List<Location> _locations = new();
         public string Name { get; set; }
         private List<Event> _events;
@@ -55,7 +56,7 @@ namespace SimCity.Locations
                CleanEvents();
                Console.SetCursorPosition(0, 50);
                Console.Write($"Timme: {hour}");
-               Thread.Sleep(1000/_fps);
+               //Thread.Sleep(1000/_fps);
             }
         }
 
@@ -88,6 +89,9 @@ namespace SimCity.Locations
                         select (first, second);
             foreach (var pair in pairs) {
                 _events.Add(Event.Create(pair, _locations));
+            }
+            if (random.Next(10000) < _locations[1].Inhabitants.Count){
+                _events.Add(Event.Create((_locations[1].Inhabitants[0], _locations[1].Inhabitants[0]), _locations));
             }
             foreach (Event e in _events){
                     e.ResolveEvent();

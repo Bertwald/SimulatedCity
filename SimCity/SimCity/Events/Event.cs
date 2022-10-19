@@ -49,6 +49,9 @@ namespace SimCity.Events
             if (pair.second is Citizen) {
                 return new Theft(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
             }
+            if(pair.first is Thief && pair.second == pair.first) {
+                return new Amnesty(pair.first, pair.second, pair.first.Position.x, pair.first.Position.y, locations);
+            }
             return new NullEvent(pair.first, pair.second,150,150, locations);
         }
         internal virtual string GetEventString() {
