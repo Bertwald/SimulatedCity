@@ -14,7 +14,7 @@ namespace SimCity.Events {
             //Check if there is goods in thief inventory
         }
         internal override string GetEventString() {
-            return $"Nu arresterades en tjuv!";
+            return "";
         }
 
         public override ConsoleColor Color { get => ConsoleColor.Blue; }

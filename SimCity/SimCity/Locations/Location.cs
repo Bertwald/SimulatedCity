@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 namespace SimCity.Locations
 {
     internal abstract class Location {
-        //Unused
-        //private (int x, int y) _offset;
+
         protected static Random _random = new();
         public string? Name { get; init; }
         public abstract (int rowSize, int colSize) Size { get; }

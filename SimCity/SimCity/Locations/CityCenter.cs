@@ -42,7 +42,6 @@ namespace SimCity.Locations {
         }
 
         internal override string GetPrintableString() {
-            //char[,] newFrame = (char[,])_empty.Clone();
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.x, person.Position.y] = person.Graphics;
             }

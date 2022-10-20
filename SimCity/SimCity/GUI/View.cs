@@ -11,7 +11,7 @@ namespace SimCity.GUI
 {
     internal class View
     {
-        private static string[] news = new string[7];
+        private static string[] news = new string[5];
         public static void PrintCity(string[] rows)
         {
             Console.SetCursorPosition(0, 0);
@@ -25,10 +25,11 @@ namespace SimCity.GUI
             //Print Colored Events at correct position
             foreach (Event e in events) {
                 if ( !(e is NullEvent)) {
-                    Console.SetCursorPosition(e.Col, e.Row);
+                    Console.SetCursorPosition(e.Col+1, e.Row+1);
                     Console.ForegroundColor = e.Color;
                     Console.Write(e.Symbol);
                     Console.ForegroundColor = ConsoleColor.White;
+                    Thread.Sleep(500);
                 }
             }
             Console.SetCursorPosition(0, 34);

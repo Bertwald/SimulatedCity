@@ -9,14 +9,18 @@ using System.Threading.Tasks;
 
 namespace SimCity.Locations {
     internal class City {
-        private int _fps = 10;
+        private int _fps = 5;
+        //The variables for the population limits
         private static int _policemen = 7;
         private static int _thieves = 20;
         private static int _citizens = 40;
-        public static int Thieves { get => _thieves; }
+        //Property for getting the total amount of thieves in city
+        internal static int Thieves { get => _thieves; }
         private static Random random = new();
+        //The list of locations this city contains
         private List<Location> _locations = new();
-        public string Name { get; set; }
+        //The name of the City
+        internal string Name { get; set; }
         private List<Event> _events;
         private List<Person> _population;
 
@@ -27,13 +31,14 @@ namespace SimCity.Locations {
             _events = new List<Event>();
             _population = new List<Person>();
             PopulateCity(_thieves, _policemen, _citizens);
-
+            //All poplation in city begins in city center
             foreach (Person pop in _population) {
                 _locations[0].AddPerson(pop);
             }
         }
         private void PopulateCity(int thieves, int police, int citizens) {
             for (int i = 0; i < thieves; i++) {
+                //The population is created with a home location and a random coordinate
                 _population.Add(new Thief(_locations[0], _locations[0].GetRandomPosition()));
             }
             for (int i = 0; i < police; i++) {
@@ -47,11 +52,11 @@ namespace SimCity.Locations {
             for (int hour = 0; true; hour++) {
                 UpdatePopulation();
                 HandleEvents();
-                HandleIO();
+                PrintCity();
                 CleanEvents();
-                Console.SetCursorPosition(0, 50);
+                Console.SetCursorPosition(0, 48);
                 Console.Write($"Timme: {hour}");
-                //Thread.Sleep(1000/_fps);
+                Thread.Sleep(1000/_fps);
             }
         }
 
@@ -63,7 +68,7 @@ namespace SimCity.Locations {
                 _fps--;
             }
         }
-        private void HandleIO() {
+        private void PrintCity() {
             string toPrint = "";
             foreach (Location location in _locations) {
                 toPrint += location.GetPrintableString();
