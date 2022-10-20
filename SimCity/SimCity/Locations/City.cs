@@ -81,15 +81,10 @@ namespace SimCity.Locations {
         private void HandleEvents() {
             var pairs = from first in _locations[0].Inhabitants
                         from second in _locations[0].Inhabitants
-                        where first.Position == second.Position && first is Thief && second is not Thief
+                        where first.Position == second.Position && 
+                        ((first is Thief && second is not Thief) || 
+                        (first is Police && second is Citizen))
                         select (first, second);
-            foreach (var pair in pairs) {
-                _events.Add(Event.Create(pair, _locations));
-            }
-            pairs = from first in _locations[0].Inhabitants
-                    from second in _locations[0].Inhabitants
-                    where first.Position == second.Position && first is Police && second is Citizen
-                    select (first, second);
             foreach (var pair in pairs) {
                 _events.Add(Event.Create(pair, _locations));
             }
