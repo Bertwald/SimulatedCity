@@ -10,9 +10,9 @@ using System.Threading.Tasks;
 namespace SimCity.Locations {
     internal class City {
         private int _fps = 10;
-        private static int _policemen = 30;
-        private static int _thieves = 40;
-        private static int _citizens = 60;
+        private static int _policemen = 7;
+        private static int _thieves = 20;
+        private static int _citizens = 40;
         public static int Thieves { get => _thieves; }
         private static Random random = new();
         private List<Location> _locations = new();
