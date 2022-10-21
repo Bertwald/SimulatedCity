@@ -12,6 +12,8 @@ namespace SimCity.Persons
 {
     internal abstract class Person
     {
+        //------------------------------------------------------------------------------------------------------------
+        //                                            non-person stuff
         internal enum Directions {
             North,
             NorthEast,
@@ -41,6 +43,7 @@ namespace SimCity.Persons
         internal (int, int) GetRandomDirectionTuple() {
             return GetDirectionTuple(GetRandomDirection());
         }
+        //------------------------------------------------------------------------------------------------------------
         internal Person(string? name, Location home, (int, int) position) {
             Random random = new();
             Home = home;
@@ -49,7 +52,6 @@ namespace SimCity.Persons
             yPos= position.Item2;
             _direction = GetRandomDirectionTuple();
             _bounds = home.Size;
-            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
         internal Person(Location home, (int, int) position) {
             Home = home;
@@ -58,7 +60,6 @@ namespace SimCity.Persons
             yPos = position.Item2;
             _direction = GetRandomDirectionTuple();
             _bounds = home.Size;
-            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
         internal Person(string? name, Location home, (int x, int y) position, (int x, int y) direction) {
             Name = name;
@@ -67,12 +68,10 @@ namespace SimCity.Persons
             yPos = position.y;
             _direction = direction;
             _bounds = home.Size;
-            //Inventory = InventoryBuilder.GetCitizenInventory(this);
         }
 
         public string? Name { get; set; }
         public Location Home { get; set; }
-        //public (int x, int y) Position { get; set; }
         public (int x, int y) Position { get => (xPos, yPos); set => (xPos, yPos) = value; }
         private int xPos;
         private int yPos;
@@ -81,32 +80,8 @@ namespace SimCity.Persons
         public abstract char Graphics { get; }
         public abstract List<Item> Inventory { get; protected set; }
         public virtual void Move() {
-            xPos += _direction.x;
-            yPos += _direction.y;
-            if (xPos < 0) {
-                xPos += _bounds.x;
-            }
-            if (yPos < 0) {
-                yPos += _bounds.y;
-            }
-            if (xPos >= _bounds.x) {
-                xPos -= _bounds.x;
-            }
-            if (yPos >= _bounds.y) {
-                yPos -= _bounds.y;
-            }
-            /*
-            Position = (Position.x + _direction.x , Position.y + _direction.y);
-            if(Position.x < 0) {
-                Position = (Position.x+_bounds.x, Position.y);
-            }if (Position.y < 0) {
-                Position = (Position.x, Position.y + _bounds.y);
-            } if (Position.x >= _bounds.x) {
-                Position = (Position.x - _bounds.x, Position.y);
-            } if (Position.y >= _bounds.y) {
-                Position = (Position.x, Position.y - _bounds.y);
-            }
-            */
+            xPos = (xPos + _bounds.x + _direction.x) % _bounds.x;
+            yPos = (yPos + _bounds.y + _direction.y) % _bounds.y;
         }
         internal void SetHome(Location location) {
             if (location == null) {
@@ -122,12 +97,5 @@ namespace SimCity.Persons
         internal string GetPersonInfo() {
             return "";
         }
-
-        //Only if prop solution wont work
-        /*
-        public List<Item> GetInventory() {
-            return Inventory;
-        }
-        */
     }
 }
