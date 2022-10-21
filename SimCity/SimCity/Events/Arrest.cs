@@ -1,11 +1,6 @@
-﻿using SimCity.Items;
-using SimCity.Locations;
+﻿using SimCity.Locations;
 using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace SimCity.Events
 {
@@ -16,7 +11,6 @@ namespace SimCity.Events
         public override char Symbol { get => 'A'; }
         public static int Arrests { get { return _numberOfArrests; } }
         public static int NumberJailed { get { return _numberJailed; } }
-
         public Arrest(Person thief, Person police, int row, int col, List<Location> locations) : base(thief, police, row, col, locations) {
             _numberOfArrests++;
         }
@@ -34,9 +28,6 @@ namespace SimCity.Events
         internal override string GetEventString() {
             return $"Nu arresterades en tjuv!";
         }
-
         public override ConsoleColor Color { get => ConsoleColor.Blue; }
-        public override int NumberOfInstances { get => _numberOfArrests; }
-
     }
 }

@@ -1,17 +1,11 @@
 ﻿using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimCity.Locations {
     internal class Jail : Location {
         private List<Person> _inJail;
         private static readonly int _cols = 10;
         private static readonly int _rows = 10;
-        private char[,] _empty = new char[10, 10];
-        char[,] newFrame = new char[10, 10];
+        private readonly char[,] newFrame = new char[10, 10];
         public override List<Person> Inhabitants { get => _inJail; }
         public override (int rowSize, int colSize) Size { get => (_rows, _cols); }
 
@@ -23,13 +17,11 @@ namespace SimCity.Locations {
             Name = "City Center";
             for (int row = 0; row < _rows; row++) {
                 for (int col = 0; col < _cols; col++) {
-                    _empty[row, col] = ' ';
                     newFrame[row, col] = ' ';
                 }
             }
         }
         internal override string GetPrintableString() {
-            //char[,] newFrame = (char[,])_empty.Clone();
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.y, person.Position.x] = person.Graphics;
             }

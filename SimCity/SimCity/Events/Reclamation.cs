@@ -1,16 +1,12 @@
 ﻿using SimCity.Locations;
 using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimCity.Events {
     internal class Reclamation : Event {
         private static int _numberOfReturns = 0;
-        public static int NumberOfReturns { get { return _numberOfReturns; } }
+        public static int NumberOfReturns { get => _numberOfReturns; }
         public override char Symbol { get => 'R'; }
+        public override ConsoleColor Color { get => ConsoleColor.Green; }
         public Reclamation(Person police, Person citizen, int row, int col, List<Location> locations) : base(police, citizen, row, col, locations) {
         }
         public override void ResolveEvent() {
@@ -25,7 +21,5 @@ namespace SimCity.Events {
         internal override string GetEventString() {
             return $"En medborgare fick tillbaka sina saker!";
         }
-
-        public override ConsoleColor Color { get => ConsoleColor.Green; }
     }
 }

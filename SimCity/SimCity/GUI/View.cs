@@ -1,11 +1,6 @@
 ﻿using SimCity.Events;
 using SimCity.Locations;
 using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimCity.GUI
 {
@@ -22,12 +17,12 @@ namespace SimCity.GUI
             //Print Colored Events at correct position
             foreach (Event e in events) {
                 //NullEvent is only a placeholder for events which are badly created
-                if ( !(e is NullEvent)) {
+                if ( e is not NullEvent) {
                     Console.SetCursorPosition(e.Col+1, e.Row+1);
                     Console.ForegroundColor = e.Color;
                     Console.Write(e.Symbol);
                     Console.ForegroundColor = ConsoleColor.White;
-                    Thread.Sleep(500);
+                    //Thread.Sleep(500);
                 }
             }
             Console.SetCursorPosition(0, 34);
@@ -41,13 +36,12 @@ namespace SimCity.GUI
                 $"{Theft.NumberOfThefts- Reclamation.NumberOfReturns} \t Varav hos polisen: {Police._confiscated.Count}     {Environment.NewLine}");
             //Add events to the newsarray and print the hourly news
             foreach (Event e in events) {
-                if (!(e is NullEvent)) {
+                if (e is not NullEvent) {
                     AddNews(e.GetEventString());
                 }
             }
             PrintNews();
         }
-
         private static void PrintNews() {
             Console.Write(string.Join(Environment.NewLine, news));
         }

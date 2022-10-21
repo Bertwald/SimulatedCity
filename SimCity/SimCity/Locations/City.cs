@@ -1,11 +1,6 @@
 ﻿using SimCity.Events;
 using SimCity.GUI;
 using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimCity.Locations {
     internal class City {
@@ -21,8 +16,8 @@ namespace SimCity.Locations {
         private List<Location> _locations = new();
         //The name of the City
         internal string Name { get; set; }
-        private List<Event> _events;
-        private List<Person> _population;
+        private readonly List<Event> _events;
+        private readonly List<Person> _population;
 
         public City(string name) {
             Name = name;
@@ -56,10 +51,9 @@ namespace SimCity.Locations {
                 CleanEvents();
                 Console.SetCursorPosition(0, 48);
                 Console.Write($"Timme: {hour}");
-                Thread.Sleep(1000/_fps);
+                //Thread.Sleep(1000 / _fps);
             }
         }
-
         private void IncreaseFPS() {
             _fps++;
         }

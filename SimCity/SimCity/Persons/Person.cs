@@ -1,11 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using SimCity.Items;
+﻿using SimCity.Items;
 using SimCity.Locations;
 
 namespace SimCity.Persons
@@ -44,15 +37,6 @@ namespace SimCity.Persons
             return GetDirectionTuple(GetRandomDirection());
         }
         //------------------------------------------------------------------------------------------------------------
-        internal Person(string? name, Location home, (int, int) position) {
-            Random random = new();
-            Home = home;
-            Name = name;
-            xPos = position.Item1;
-            yPos= position.Item2;
-            _direction = GetRandomDirectionTuple();
-            _bounds = home.Size;
-        }
         internal Person(Location home, (int, int) position) {
             Home = home;
             Name = "NPC";
@@ -61,15 +45,6 @@ namespace SimCity.Persons
             _direction = GetRandomDirectionTuple();
             _bounds = home.Size;
         }
-        internal Person(string? name, Location home, (int x, int y) position, (int x, int y) direction) {
-            Name = name;
-            Home = home;
-            xPos = position.x;
-            yPos = position.y;
-            _direction = direction;
-            _bounds = home.Size;
-        }
-
         public string? Name { get; set; }
         public Location Home { get; set; }
         public (int x, int y) Position { get => (xPos, yPos); set => (xPos, yPos) = value; }
