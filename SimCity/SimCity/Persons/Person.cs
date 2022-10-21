@@ -1,5 +1,6 @@
 ﻿using SimCity.Items;
 using SimCity.Locations;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SimCity.Persons
 {
@@ -29,11 +30,11 @@ namespace SimCity.Persons
             Directions.NorthWest => (-1, -1),
             _ => (0, 0),
         };
-        internal Directions GetRandomDirection() {
+        internal static Directions GetRandomDirection() {
             Random random = new Random();
             return (Directions)random.Next((int)Directions.Max);
         }
-        internal (int, int) GetRandomDirectionTuple() {
+        internal static (int, int) GetRandomDirectionTuple() {
             return GetDirectionTuple(GetRandomDirection());
         }
         //------------------------------------------------------------------------------------------------------------
@@ -66,6 +67,11 @@ namespace SimCity.Persons
                 _bounds = Home.Size;
                 Position = Home.GetRandomPosition();
                 _direction = GetRandomDirectionTuple();
+            }
+        }
+        internal void SetDirection((int x, int y) newdirection) {
+            if(newdirection != (0, 0)) {
+                _direction = newdirection;
             }
         }
         //Gets the person as in the new output of wednesday 19/10

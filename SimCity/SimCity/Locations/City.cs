@@ -85,6 +85,12 @@ namespace SimCity.Locations {
             if (random.Next(10000) < _locations[1].Inhabitants.Count) {
                 _events.Add(Event.Create((_locations[1].Inhabitants[0], _locations[1].Inhabitants[0]), _locations));
             }
+            if((Theft.NumberOfThefts-Reclamation.NumberOfReturns) > random.Next(10000)) {
+                Person? firstPolice = _population.Find(x => x is Police);
+                if (firstPolice is not null) {
+                    _events.Add(new ChangePatrol(firstPolice, firstPolice, firstPolice.Position.x, firstPolice.Position.y, _locations));
+                }
+            }
             View.PrintCityEvents(_events, _locations);
             foreach (Event e in _events) {
                 e.ResolveEvent();

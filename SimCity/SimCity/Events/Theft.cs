@@ -9,7 +9,6 @@ namespace SimCity.Events
         public static int NumberOfThefts { get =>_numberOfThefts; }
         public override char Symbol { get => 'X'; }
         public override ConsoleColor Color { get => ConsoleColor.Red; }
-        //public override int NumberOfInstances { get => _numberOfThefts; }
         public Theft(Person thief, Person citizen, int row, int col, List<Location> locations) : base(thief, citizen, row, col, locations) {
         }
         public override void ResolveEvent() {

@@ -7,7 +7,7 @@ namespace SimCity.GUI
     internal class View
     {
         //Holds a given capacity of newsflashes
-        private static string[] news = new string[5];
+        private static readonly string[] news = new string[5];
         //Writes a given (presumably long) string at base position 
         internal static void PrintCityString(string City) {
             Console.SetCursorPosition(0, 0);
@@ -17,7 +17,7 @@ namespace SimCity.GUI
             //Print Colored Events at correct position
             foreach (Event e in events) {
                 //NullEvent is only a placeholder for events which are badly created
-                if ( e is not NullEvent) {
+                if ( e is not NullEvent && e is not Amnesty) {
                     Console.SetCursorPosition(e.Col+1, e.Row+1);
                     Console.ForegroundColor = e.Color;
                     Console.Write(e.Symbol);

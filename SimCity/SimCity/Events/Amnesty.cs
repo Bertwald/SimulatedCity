@@ -5,7 +5,7 @@ namespace SimCity.Events {
     internal class Amnesty : Event {
         private static int _amnesties = 0;
         public static int Amnesties { get { return _amnesties; } }
-        public override char Symbol { get => 'R'; }
+        public override char Symbol { get => 'A'; }
         public override ConsoleColor Color { get => ConsoleColor.Cyan; }
         public Amnesty(Person one, Person theOther, int row, int col, List<Location> locations) : base(one, theOther, row, col, locations) {
         }
