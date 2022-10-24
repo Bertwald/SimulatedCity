@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
-using SimCity.Items;
+﻿using SimCity.Items;
 using SimCity.Locations;
+using System.Security.Cryptography.X509Certificates;
 
 namespace SimCity.Persons
 {
@@ -36,40 +30,14 @@ namespace SimCity.Persons
             Directions.NorthWest => (-1, -1),
             _ => (0, 0),
         };
-        internal Directions GetRandomDirection() {
+        internal static Directions GetRandomDirection() {
             Random random = new Random();
             return (Directions)random.Next((int)Directions.Max);
         }
-        internal (int, int) GetRandomDirectionTuple() {
+        internal static (int, int) GetRandomDirectionTuple() {
             return GetDirectionTuple(GetRandomDirection());
         }
         //------------------------------------------------------------------------------------------------------------
-        internal Person(string? name, Location home, (int, int) position) {
-            Random random = new();
-            Home = home;
-            Name = name;
-            xPos = position.Item1;
-            yPos= position.Item2;
-            _direction = GetRandomDirectionTuple();
-            _bounds = home.Size;
-        }
-        internal Person(Location home, (int, int) position) {
-            Home = home;
-            Name = "NPC";
-            xPos = position.Item1;
-            yPos = position.Item2;
-            _direction = GetRandomDirectionTuple();
-            _bounds = home.Size;
-        }
-        internal Person(string? name, Location home, (int x, int y) position, (int x, int y) direction) {
-            Name = name;
-            Home = home;
-            xPos = position.x;
-            yPos = position.y;
-            _direction = direction;
-            _bounds = home.Size;
-        }
-
         public string? Name { get; set; }
         public Location Home { get; set; }
         public (int x, int y) Position { get => (xPos, yPos); set => (xPos, yPos) = value; }
@@ -79,6 +47,14 @@ namespace SimCity.Persons
         private (int x, int y) _bounds;
         public abstract char Graphics { get; }
         public abstract List<Item> Inventory { get; protected set; }
+        internal Person(Location home, (int, int) position) {
+            Home = home;
+            Name = "NPC";
+            xPos = position.Item1;
+            yPos = position.Item2;
+            _direction = GetRandomDirectionTuple();
+            _bounds = home.Size;
+        }
         public virtual void Move() {
             xPos = (xPos + _bounds.x + _direction.x) % _bounds.x;
             yPos = (yPos + _bounds.y + _direction.y) % _bounds.y;
@@ -91,6 +67,11 @@ namespace SimCity.Persons
                 _bounds = Home.Size;
                 Position = Home.GetRandomPosition();
                 _direction = GetRandomDirectionTuple();
+            }
+        }
+        internal void SetDirection((int x, int y) newdirection) {
+            if(newdirection != (0, 0)) {
+                _direction = newdirection;
             }
         }
         //Gets the person as in the new output of wednesday 19/10

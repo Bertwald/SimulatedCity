@@ -1,15 +1,10 @@
 ﻿using SimCity.Events;
 using SimCity.GUI;
 using SimCity.Persons;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace SimCity.Locations {
     internal class City {
-        private int _fps = 5;
+        private int _fps = 10;
         //The variables for the population limits
         private static int _policemen = 7;
         private static int _thieves = 20;
@@ -21,8 +16,8 @@ namespace SimCity.Locations {
         private List<Location> _locations = new();
         //The name of the City
         internal string Name { get; set; }
-        private List<Event> _events;
-        private List<Person> _population;
+        private readonly List<Event> _events;
+        private readonly List<Person> _population;
 
         public City(string name) {
             Name = name;
@@ -56,10 +51,9 @@ namespace SimCity.Locations {
                 CleanEvents();
                 Console.SetCursorPosition(0, 48);
                 Console.Write($"Timme: {hour}");
-                //Thread.Sleep(1000/_fps);
+                //Thread.Sleep(1000 / _fps);
             }
         }
-
         private void IncreaseFPS() {
             _fps++;
         }
@@ -90,6 +84,12 @@ namespace SimCity.Locations {
             }
             if (random.Next(10000) < _locations[1].Inhabitants.Count) {
                 _events.Add(Event.Create((_locations[1].Inhabitants[0], _locations[1].Inhabitants[0]), _locations));
+            }
+            if((Theft.NumberOfThefts-Reclamation.NumberOfReturns) > random.Next(10000)) {
+                Person? firstPolice = _population.Find(person => person is Police);
+                if (firstPolice is not null) {
+                    _events.Add(new ChangePatrol(firstPolice, firstPolice, firstPolice.Position.x, firstPolice.Position.y, _locations));
+                }
             }
             View.PrintCityEvents(_events, _locations);
             foreach (Event e in _events) {
