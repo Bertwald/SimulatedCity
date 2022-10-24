@@ -40,18 +40,19 @@ namespace SimCity.Locations {
             }
             string representation = "";
             //Add a Top Border
-            representation += (new string('=', 52) + "SimCity" + new string('=', 52));
+            //Nice Borders credit Jesper et al.
+            representation += '┌' + (new string('─', 51) + "SimCity" + new string('─', 51)) + '┐';
             representation += System.Environment.NewLine;
             for (int row = 0; row < newFrame.GetLength(0); row++) {
                 //Add contents to representation with each line starting and ending with '|'
-                representation += "|";
+                representation += "│";
                 for (int col = 0; col < newFrame.GetLength(1); col++) {
                     representation += newFrame[row, col].ToString();
                 }
-                representation += "|";
+                representation += "│";
                 representation += System.Environment.NewLine;
             }
-            representation += new string('=', 111);
+            representation += '└' + new string('─', 109) + '┘';
             //Clean the NewFrame
             foreach (Person person in Inhabitants) {
                 newFrame[person.Position.x, person.Position.y] = ' ';
