@@ -56,7 +56,7 @@ namespace SimCity.Locations {
                 CleanEvents();
                 Console.SetCursorPosition(0, 48);
                 Console.Write($"Timme: {hour}");
-                Thread.Sleep(1000/_fps);
+                //Thread.Sleep(1000/_fps);
             }
         }
 
