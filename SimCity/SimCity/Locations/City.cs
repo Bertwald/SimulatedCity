@@ -4,7 +4,7 @@ using SimCity.Persons;
 
 namespace SimCity.Locations {
     internal class City {
-        private int _fps = 5;
+        private int _fps = 10;
         //The variables for the population limits
         private static int _policemen = 7;
         private static int _thieves = 20;
@@ -86,7 +86,7 @@ namespace SimCity.Locations {
                 _events.Add(Event.Create((_locations[1].Inhabitants[0], _locations[1].Inhabitants[0]), _locations));
             }
             if((Theft.NumberOfThefts-Reclamation.NumberOfReturns) > random.Next(10000)) {
-                Person? firstPolice = _population.Find(x => x is Police);
+                Person? firstPolice = _population.Find(person => person is Police);
                 if (firstPolice is not null) {
                     _events.Add(new ChangePatrol(firstPolice, firstPolice, firstPolice.Position.x, firstPolice.Position.y, _locations));
                 }

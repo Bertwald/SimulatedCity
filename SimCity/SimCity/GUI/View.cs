@@ -22,7 +22,7 @@ namespace SimCity.GUI
                     Console.ForegroundColor = e.Color;
                     Console.Write(e.Symbol);
                     Console.ForegroundColor = ConsoleColor.White;
-                    //Thread.Sleep(500);
+                    //Thread.Sleep(750);
                 }
             }
             Console.SetCursorPosition(0, 34);

@@ -8,7 +8,6 @@ namespace SimCity.Locations {
         private readonly char[,] newFrame = new char[10, 10];
         public override List<Person> Inhabitants { get => _inJail; }
         public override (int rowSize, int colSize) Size { get => (_rows, _cols); }
-
         public override (int, int) GetRandomPosition() {
             return (_random.Next(1,_rows-1), _random.Next(1, _cols-1));
         }

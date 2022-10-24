@@ -38,14 +38,6 @@ namespace SimCity.Persons
             return GetDirectionTuple(GetRandomDirection());
         }
         //------------------------------------------------------------------------------------------------------------
-        internal Person(Location home, (int, int) position) {
-            Home = home;
-            Name = "NPC";
-            xPos = position.Item1;
-            yPos = position.Item2;
-            _direction = GetRandomDirectionTuple();
-            _bounds = home.Size;
-        }
         public string? Name { get; set; }
         public Location Home { get; set; }
         public (int x, int y) Position { get => (xPos, yPos); set => (xPos, yPos) = value; }
@@ -55,6 +47,14 @@ namespace SimCity.Persons
         private (int x, int y) _bounds;
         public abstract char Graphics { get; }
         public abstract List<Item> Inventory { get; protected set; }
+        internal Person(Location home, (int, int) position) {
+            Home = home;
+            Name = "NPC";
+            xPos = position.Item1;
+            yPos = position.Item2;
+            _direction = GetRandomDirectionTuple();
+            _bounds = home.Size;
+        }
         public virtual void Move() {
             xPos = (xPos + _bounds.x + _direction.x) % _bounds.x;
             yPos = (yPos + _bounds.y + _direction.y) % _bounds.y;
